@@ -7,8 +7,8 @@ import (
 )
 
 type GZFileWriter struct {
-	file     *os.File
-	gzwriter *gzip.Writer
+	file *os.File
+	*gzip.Writer
 }
 
 type GZFileWriters struct {
@@ -28,13 +28,8 @@ func NewGZFileWriter(name string) *GZFileWriter {
 }
 
 func (gz *GZFileWriter) Close() {
-	gz.gzwriter.Close()
+	gz.Writer.Close()
 	gz.file.Close()
-}
-
-func (gz *GZFileWriter) GetWriter() io.Writer {
-	var x io.Writer = gz.gzwriter
-	return x
 }
 
 func NewGZFileWriters(names []string) *GZFileWriters {

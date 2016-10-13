@@ -7,8 +7,8 @@ import (
 )
 
 type GZFileReader struct {
-	file     *os.File
-	gzreader *gzip.Reader
+	file *os.File
+	*gzip.Reader
 }
 
 type GZFileReaders struct {
@@ -31,13 +31,8 @@ func NewGZFileReader(name string) *GZFileReader {
 }
 
 func (gz *GZFileReader) Close() {
-	gz.gzreader.Close()
+	gz.Reader.Close()
 	gz.file.Close()
-}
-
-func (gz *GZFileReader) GetReader() io.Reader {
-	var x io.Reader = gz.gzreader
-	return x
 }
 
 func NewGZFileReaders(names []string) *GZFileReaders {

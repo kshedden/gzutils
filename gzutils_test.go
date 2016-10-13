@@ -8,16 +8,14 @@ import (
 
 func TestWrite(t *testing.T) {
 	g := NewGZFileWriter("0.gz")
-	w := g.GetWriter()
 	msg := "This is a single file\n"
-	w.Write([]byte(msg))
+	g.Write([]byte(msg))
 	g.Close()
 }
 
 func TestRead(t *testing.T) {
 	g := NewGZFileReader("0.gz")
-	r := g.GetReader()
-	b, err := ioutil.ReadAll(r)
+	b, err := ioutil.ReadAll(g)
 	if err != nil {
 		panic(err)
 	}
