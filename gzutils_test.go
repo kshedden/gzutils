@@ -7,14 +7,14 @@ import (
 )
 
 func TestWrite(t *testing.T) {
-	g := NewGZFileWriter("0.gz")
+	g := NewFileWriter("0.gz")
 	msg := "This is a single file\n"
 	g.Write([]byte(msg))
 	g.Close()
 }
 
 func TestRead(t *testing.T) {
-	g := NewGZFileReader("0.gz")
+	g := NewFileReader("0.gz")
 	b, err := ioutil.ReadAll(g)
 	if err != nil {
 		panic(err)
@@ -26,7 +26,7 @@ func TestRead(t *testing.T) {
 func TestWriteMulti(t *testing.T) {
 
 	names := []string{"0.gz", "1.gz", "2.gz", "3.gz"}
-	g := NewGZFileWriters(names)
+	g := NewFileWriters(names)
 	w := g.GetWriters()
 
 	for i, _ := range names {
@@ -40,7 +40,7 @@ func TestWriteMulti(t *testing.T) {
 func TestReadMulti(t *testing.T) {
 
 	names := []string{"0.gz", "1.gz", "2.gz", "3.gz"}
-	g := NewGZFileReaders(names)
+	g := NewFileReaders(names)
 	r := g.GetReaders()
 
 	for i, _ := range names {
